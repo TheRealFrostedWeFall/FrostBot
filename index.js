@@ -4,10 +4,15 @@ const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
 
 
+
+
 bot.on("ready", async () => {
-   console.log(`${bot.user.username} is online!`);
-   bot.user.setGame("Inazuma Eleven Firestorm!!");
+
+  console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help`, {type: "WATCHING"});
+
 });
+
 bot.on("message", async message => {
    if(message.author.bot) return;
    if(message.channel.type === "dm") return;
