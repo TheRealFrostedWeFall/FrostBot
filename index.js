@@ -3,18 +3,6 @@ const Discord = require("discord.js");
 
 const bot = new Discord.Client({disableEveryone: true});
 
-const http = require('http');
-const express = require('express');
-const app = express();
-app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping Received");
-  response.sendStatus(200);
-});
-app.listen(process.env.PORT);
-setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 280000);
-
 
 bot.on("ready", async () => {
    console.log(`${bot.user.username} is online!`);
@@ -40,8 +28,8 @@ bot.on("message", async message => {
   }
 
    if(cmd === `${prefix}ping`) {
-      const m = await message.channel.send(`Oof! (  **???**  |  **???**  ) \\🏓`);
-      m.edit(`**Oof!** (  **${message.createdTimestamp - message.createdTimestamp}ms** roundtrip/response  |  **${Math.round(bot.ping)}ms** API heartbeat  ) \\🏓`);
+      const m = await message.channel.send(`Oof! (  **???**  |  **???**  ) \\🎧`);
+      m.edit(`**Oof!** (  __**${message.createdTimestamp - message.createdTimestamp}ms**__ roundtrip and response  |  __**${Math.round(bot.ping)}ms**__ API ping  ) \\🎧`);
     }
 
    if(cmd === `${prefix}info`){
