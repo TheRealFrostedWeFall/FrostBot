@@ -75,6 +75,7 @@ bot.on("message", async message => {
     .setTitle("Server Information")
     .setDescription("Some information about the current guild!")
     .setThumbnail(sicon)
+    .setColor("#42f4e5")    
     .addField("Guild Name", message.guild.name)
     .addField("Guild Created On", message.guild.createdAt)
     .addField("You Joined", message.member.joinedAt)
@@ -82,7 +83,27 @@ bot.on("message", async message => {
 
     return message.channel.send(serverinfoembed);
 
+}
 
+  if(cmd === `${prefix}report`){
+
+    let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!rUser) return message.channel.send("Invalid user");
+    let reason  = args.join(" ").slice(22);
+    let reportembed = new Discord.RichEmbed()
+    .setDescription("Report A User")
+    .setColor("#42f4e5")
+    .addField("Reported User", `${rUser} with ID: ${rUser.id}`)
+    .addField("Reported By", `${message.author} with ID: ${message.author.id}`)
+    .addField("Channel", message.channel)
+    .addField("TimeStamp", message.createdAt)
+    .addField("Reason", reason);
+
+    let reportschannel = message.guild.channels.find(`name`, "reports");
+    if(!reportschannel) return message.channel.send("Couldn't find appropriate reports channel!");
+
+    message.delete().catch(O_o=>{});
+    reportschannel.send(reportembed);
   }
 
 });
