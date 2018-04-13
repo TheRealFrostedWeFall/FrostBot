@@ -1,0 +1,14 @@
+{
+  "name": "vilebot",
+  "version": "1.0.0",
+  "description": "The test bot for the Vile Discord server!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "FrostedWeFall",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
+}
