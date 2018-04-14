@@ -3,15 +3,13 @@ const Discord = require("discord.js");
 
 const bot = new Discord.Client({disableEveryone: true});
 
-
-
-
 bot.on("ready", async () => {
 
-  console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-  bot.user.setActivity(`over ${bot.users.size} players! | ~help`, {type: "WATCHING"});
+  console.log(`${bot.user.username} is online on ${bot.guilds.size} servers and watching ${bot.users.size} users!`);
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help`, {type: "WATCHING"});
 
 });
+
 
 bot.on("message", async message => {
    if(message.author.bot) return;
@@ -24,7 +22,7 @@ bot.on("message", async message => {
 
    if(cmd === `${prefix}creator`){
 
-   	return message.channel.send("FrostedWeFall is my creator :wink:");
+    return message.channel.send("FrostedWeFall is my creator :wink:");
    }
 
    if(cmd === `${prefix}donate`){
@@ -48,30 +46,33 @@ bot.on("message", async message => {
 
     let infoembed = new Discord.RichEmbed()
     .setTitle("FrostBot Information")
-   	.setDescription("Here is some information about me! ^-^")
-   	.setColor("#42f4e5")
-   	.addField("Bot Name", bot.user.username)
-   	.addField("Bot Creator", botconfig.author)
-    .addField("Bot Version", botconfig.version);
+    .setDescription("Here is some information about me! ^-^")
+    .setColor("#42f4e5")
+    .addField("Bot Name", bot.user.username)
+    .addField("Bot Creator", botconfig.author)
+    .addField("Bot Version", botconfig.version)
+    .addField(`${Date.now() - (message.createdTimestamp)}ms`, "Roundtrip and Response ↪")
+    .addField(`${Math.round(bot.ping)}ms`, "API ping 🏓");     
 
-   	return message.channel.send(infoembed);
+    return message.channel.send(infoembed);
 
    }
 
     if(cmd === `${prefix}help`){
       let botembed = new Discord.RichEmbed()
-    	.setTitle("FrostBot Help Commands")
-    	.setDescription("Need some help with FrostBot?")
-    	.setColor("#42f4e5")
-    	.addField("~help", "Sends this message ^-^")
-    	.addField("~ping", "Shows the clientside and roundtrip ping")
-    	.addField("~info", "Gives you some Information about the bot")
+      .setTitle("FrostBot Help Commands")
+      .setDescription("Need some help with FrostBot?")
+      .setColor("#42f4e5")
+      .addField("~help", "Sends this message ^-^")
+      .addField("~ping", "Shows the clientside and roundtrip ping")
+      .addField("~info", "Gives you some Information about the bot")
       .addField("~guildinfo", "Gives you some Information about the current Guild")
       .addField("~donate", "Donate to help support development of FrostBot")
       .addField("~report [<user>] [<reason>]", "Reports a player")
+      .addField("~kick [<user>] [<reason>]", "Kicks a player from the guild")
       .addField("~creator", "Whos the creator of Frost?");    
 
-    	return message.channel.send(botembed);
+      return message.channel.send(botembed);
 
     }
 
@@ -84,9 +85,9 @@ bot.on("message", async message => {
     .setThumbnail(sicon)
     .setColor("#42f4e5")    
     .addField("Guild Name", message.guild.name)
+    .addField("Guild Member Count", message.guild.memberCount)
     .addField("Guild Created On", message.guild.createdAt)
-    .addField("You Joined", message.member.joinedAt)
-    .addField("Guild Member Count", message.guild.memberCount);
+    .addField("You Joined this Guild at", message.member.joinedAt);
 
     return message.channel.send(serverinfoembed);
 
@@ -97,6 +98,7 @@ bot.on("message", async message => {
     let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!rUser) return message.channel.send("Invalid user");
     let reason  = args.join(" ").slice(22);
+    if(!reason) return message.channel.send("You must specify a reason to report this player")
     let reportembed = new Discord.RichEmbed()
     .setDescription("Report A User")
     .setColor("#42f4e5")
@@ -112,8 +114,31 @@ bot.on("message", async message => {
     message.delete().catch(O_o=>{});
     reportschannel.send(reportembed);
   }
+   if(cmd === `${prefix}kick`){
 
+      message.delete().catch(O_o=>{});
+      let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+
+      
+      
+      let kickreason  = args.join(" ").slice(22);
+      if(!kUser) return message.channel.send("You must specify a user!");
+      if(!kUser.kickable) return message.channel.send("❌ The bot has no permissions to kick this player");
+      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("🤔 You do not have the required permissions to kick this user!");
+      if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be kicked!");
+      if(!kickreason) return message.channel.send("You must specify a reason to kick this player");
+
+
+      message.channel.send(`✅ ${kUser} has been kicked from the guild for ${kickreason}`);
+      message.guild.member(kUser).kick(kickreason);
+   }
 });
-	
+
+
+  
 
 bot.login(botconfig.token);
+
+
+
+
