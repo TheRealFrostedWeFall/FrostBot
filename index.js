@@ -9,7 +9,7 @@ const bot = new Discord.Client({disableEveryone: true});
 bot.on("ready", async () => {
 
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.users.size} players! | ~help`, {type: "WATCHING"});
 
 });
 
@@ -33,8 +33,14 @@ bot.on("message", async message => {
   }
 
    if(cmd === `${prefix}ping`) {
-      const m = await message.channel.send(`Oof! (  **???**  |  **???**  ) \\🎧`);
-      m.edit(`**Oof!** (  __**${message.createdTimestamp - message.createdTimestamp}ms**__ roundtrip and response  |  __**${Math.round(bot.ping)}ms**__ API ping  ) \\🎧`);
+      let pingembed = new Discord.RichEmbed()
+      .setDescription("🎉")
+      .setColor("#42f4e5")
+      .addField(`${Date.now() - (message.createdTimestamp)}ms`, "Roundtrip and Response ↪")
+      .addField(`${Math.round(bot.ping)}ms`, "API ping 🏓");
+      
+      return message.channel.send(pingembed);
+        
     }
 
    if(cmd === `${prefix}info`){
@@ -62,6 +68,7 @@ bot.on("message", async message => {
     	.addField("~info", "Gives you some Information about the bot")
       .addField("~guildinfo", "Gives you some Information about the current Guild")
       .addField("~donate", "Donate to help support development of FrostBot")
+      .addField("~report [<user>] [<reason>]", "Reports a player")
       .addField("~creator", "Whos the creator of Frost?");    
 
     	return message.channel.send(botembed);
@@ -93,8 +100,8 @@ bot.on("message", async message => {
     let reportembed = new Discord.RichEmbed()
     .setDescription("Report A User")
     .setColor("#42f4e5")
-    .addField("Reported User", `${rUser} with ID: ${rUser.id}`)
-    .addField("Reported By", `${message.author} with ID: ${message.author.id}`)
+    .addField("Reported User", `${rUser}`)
+    .addField("Reported By", `${message.author}`)
     .addField("Channel", message.channel)
     .addField("TimeStamp", message.createdAt)
     .addField("Reason", reason);
