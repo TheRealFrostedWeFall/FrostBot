@@ -6,7 +6,7 @@ const bot = new Discord.Client({disableEveryone: true});
 bot.on("ready", async () => {
 
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers and watching ${bot.users.size} users!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
 
 });
 
@@ -95,7 +95,7 @@ bot.on("message", async message => {
 
   if(cmd === `${prefix}report`){
 
-    let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    const rUser = await message.guild.fetchMember(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!rUser) return message.channel.send("Invalid user");
     let reason  = args.join(" ").slice(22);
     if(!reason) return message.channel.send("You must specify a reason to report this player")
@@ -117,7 +117,7 @@ bot.on("message", async message => {
    if(cmd === `${prefix}kick`){
 
       message.delete().catch(O_o=>{});
-      let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+      const kUser = await message.guild.fetchMember(message.mentions.users.first() || message.guild.members.get(args[0]));
 
       
       
@@ -125,13 +125,32 @@ bot.on("message", async message => {
       if(!kUser) return message.channel.send("You must specify a user!");
       if(!kUser.kickable) return message.channel.send("❌ The bot has no permissions to kick this player");
       if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("🤔 You do not have the required permissions to kick this user!");
-      if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be kicked!");
-      if(!kickreason) return message.channel.send("You must specify a reason to kick this player");
+      if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("❌ That person can't be kicked!");
+      if(!kickreason) return message.channel.send("🤔 You must specify a reason to kick this player");
 
 
       message.channel.send(`✅ ${kUser} has been kicked from the guild for ${kickreason}`);
       message.guild.member(kUser).kick(kickreason);
    }
+
+
+   if(cmd === `${prefix}warn`){
+
+      message.delete().catch(O_o=>{});
+      const wUser = await message.guild.fetchMember(message.mentions.users.first() || message.guild.members.get(args[0]));
+
+      
+      
+      let warnreason  = args.join(" ").slice(22);
+      if(!wUser) return message.channel.send("🤔 You must specify a user!");
+      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("🤔 You do not have the required permissions to warn this user!");
+      if(wUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("❌ That person can't be warned!");
+      if(!warnreason) return message.channel.send("🤔 You must specify a reason to warn this player");
+
+
+      message.channel.send(`✅ ${wUser} has been warned for ${warnreason}`);
+      message.guild.member(wUser).warn(warnreason);
+    }
 });
 
 
