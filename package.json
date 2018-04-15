@@ -1,7 +1,7 @@
 {
-  "name": "vilebot",
-  "version": "1.0.0",
-  "description": "The test bot for the Vile Discord server!",
+  "name": "Frost",
+  "version": "1.0.4",
+  "description": "A Moderation Bot with more features coming soon",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

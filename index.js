@@ -1,7 +1,13 @@
 const botconfig = require("./botconfig.json");
+const packagejson = require("./package.json");
+const watchjson = require("./watch.json");
 const Discord = require("discord.js");
 
 const bot = new Discord.Client({disableEveryone: true});
+
+
+
+
 
 bot.on("ready", async () => {
 
@@ -10,10 +16,24 @@ bot.on("ready", async () => {
 
 });
 
+bot.on("guildCreate", guild => {
+  console.log(`New guild joined: ${guild.name} | (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
+});
+
+bot.on("guildDelete", guild => {
+  console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
+});
+
+
 
 bot.on("message", async message => {
-   if(message.author.bot) return;
-   if(message.channel.type === "dm") return;
+
+  if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
+
+
 
    let prefix  = botconfig.prefix;
    let messageArray = message.content.split(" ");
@@ -41,18 +61,20 @@ bot.on("message", async message => {
         
     }
 
-   if(cmd === `${prefix}info`){
+   if(cmd === `${prefix}botinfo`){
 
-
+    let bicon = bot.user.displayAvatarURL;
     let infoembed = new Discord.RichEmbed()
     .setTitle("FrostBot Information")
     .setDescription("Here is some information about me! ^-^")
+    .setThumbnail(bicon)
     .setColor("#42f4e5")
     .addField("Bot Name", bot.user.username)
-    .addField("Bot Creator", botconfig.author)
-    .addField("Bot Version", botconfig.version)
-    .addField(`${Date.now() - (message.createdTimestamp)}ms`, "Roundtrip and Response ↪")
-    .addField(`${Math.round(bot.ping)}ms`, "API ping 🏓");     
+    .addField("Bot Creator", packagejson.author)
+    .addField("Bot Version", packagejson.version)
+    .addField("Discord.js Version", "^11.3.2")
+    .addField("Auto Restart Timer", `${watchjson.throttle}ms`);
+   
 
     return message.channel.send(infoembed);
 
@@ -64,13 +86,18 @@ bot.on("message", async message => {
       .setDescription("Need some help with FrostBot?")
       .setColor("#42f4e5")
       .addField("~help", "Sends this message ^-^")
+      .addField("~creator", "Whos the creator of Frost?") 
       .addField("~ping", "Shows the clientside and roundtrip ping")
-      .addField("~info", "Gives you some Information about the bot")
+      .addField("~botinfo", "Gives you some Information about the bot")
       .addField("~guildinfo", "Gives you some Information about the current Guild")
       .addField("~donate", "Donate to help support development of FrostBot")
       .addField("~report [<user>] [<reason>]", "Reports a player")
       .addField("~kick [<user>] [<reason>]", "Kicks a player from the guild")
-      .addField("~creator", "Whos the creator of Frost?");    
+      .addField("~warn [<user>] [<reason>]", "Warns a specific player inside the guild")
+      .addField("~ban [<user>] [<reason>]", "Bansa player from the guild")
+      .addField("~purge [<integer]", "Purges a set amount of lines in the desired channel")
+      .addField("~say [<string>]", "Repeats what you said back to you");
+      
 
       return message.channel.send(botembed);
 
@@ -116,48 +143,73 @@ bot.on("message", async message => {
   }
    if(cmd === `${prefix}kick`){
 
-      message.delete().catch(O_o=>{});
-      const kUser = await message.guild.fetchMember(message.mentions.users.first() || message.guild.members.get(args[0]));
+          if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("🤔 It seems you do not have the required permissions");
+    if(args[0] == "help"){
+      message.reply("Usage: ~kick <user> <reason>");
+      return;
+    }
+    let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!kUser) return message.channel.send("❌ The user you have specified can not be found");
+    let kickreason = args.join(" ").slice(22);
+    if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("🤔 That person can't be kicked!");
+    message.delete().catch(O_o=>{});
 
-      
-      
-      let kickreason  = args.join(" ").slice(22);
-      if(!kUser) return message.channel.send("You must specify a user!");
-      if(!kUser.kickable) return message.channel.send("❌ The bot has no permissions to kick this player");
-      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("🤔 You do not have the required permissions to kick this user!");
-      if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("❌ That person can't be kicked!");
-      if(!kickreason) return message.channel.send("🤔 You must specify a reason to kick this player");
-
-
-      message.channel.send(`✅ ${kUser} has been kicked from the guild for ${kickreason}`);
-      message.guild.member(kUser).kick(kickreason);
+      message.channel.send(`✅ ${kUser} has been kicked for ${kickreason}`);
+      message.guild.member(kUser).warn(kickreason);
    }
-
-
    if(cmd === `${prefix}warn`){
 
       message.delete().catch(O_o=>{});
-      const wUser = await message.guild.fetchMember(message.mentions.users.first() || message.guild.members.get(args[0]));
+      let wUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 
       
       
       let warnreason  = args.join(" ").slice(22);
-      if(!wUser) return message.channel.send("🤔 You must specify a user!");
+      if(!wUser) return message.channel.send("❌ You must specify a user!");
       if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("🤔 You do not have the required permissions to warn this user!");
       if(wUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("❌ That person can't be warned!");
-      if(!warnreason) return message.channel.send("🤔 You must specify a reason to warn this player");
+      if(!warnreason) return message.channel.send("❌ You must specify a reason to warn this player");
 
 
-      message.channel.send(`✅ ${wUser} has been warned for ${warnreason}`);
+      message.channel.send(`❌ ${wUser} has been warned for ${warnreason}`);
       message.guild.member(wUser).warn(warnreason);
     }
-});
+
+     if(cmd === `${prefix}ban`){
+
+      message.delete().catch(O_o=>{});
+      let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+
+      
+      
+      let banreason  = args.join(" ").slice(22);
+      if(!bUser) return message.channel.send("❌ You must specify a user!");
+      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("🤔 You do not have the required permissions to ban this user!");
+      if(bUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("❌ That person can't be banned!");
+      if(!banreason) return message.channel.send("❌ You must specify a reason to ban this player");
 
 
-  
+      message.channel.send(`✅ ${bUser} has been banned for ${banreason}`);
+      message.guild.member(bUser).ban(banreason);
+    }
 
+  if(cmd === `${prefix}purge`) {
+
+    const deleteCount = parseInt(args[0], 10);
+    
+    if(!deleteCount || deleteCount < 2 || deleteCount > 100)
+      return message.reply("❌ Please provide a valid number between 2 and 100 for the number of messages to be deleted in this channel!");
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("❌ You do not have the required permissions to purge text in this channel and / or guild!");
+    const fetched = await message.channel.fetchMessages({count: deleteCount});
+    message.channel.bulkDelete(fetched)
+    message.channel.send(`✅ Successfully purged ${deleteCount} messages!`)
+      .catch(error => message.reply(`❌ Couldn't delete messages because of: ${error}`));
+  }
+    if(cmd === `${prefix}say`) {
+
+    const sayMessage = args.join(" ");
+    message.delete().catch(O_o=>{}); 
+    message.channel.send(sayMessage);
+  }
+  });
 bot.login(botconfig.token);
-
-
-
-
