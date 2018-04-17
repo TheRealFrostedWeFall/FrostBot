@@ -10,7 +10,8 @@ module.exports.run = async (bot, message, args) => {
     .addField("Guild Name", message.guild.name)
     .addField("Guild Member Count", message.guild.memberCount)
     .addField("Guild Created On", message.guild.createdAt)
-    .addField("You Joined this Guild at", message.member.joinedAt);
+    .addField("You Joined this Guild at", message.member.joinedAt)
+    .setFooter("Version 1.0.5 BETA");
 
     return message.channel.send(serverinfoembed);
 

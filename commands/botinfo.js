@@ -11,6 +11,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Bot Creator", "FrostedWeFall#8609")
     .addField("Bot Version", "V1.0.4")
     .addField("Discord.js Version", "^11.3.2")
+    .setFooter("Version 1.0.5 BETA");
 
    
 

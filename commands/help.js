@@ -9,12 +9,15 @@ module.exports.run = async (bot, message, args) => {
       .addField("~ping", "Shows the clientside and roundtrip ping")
       .addField("~botinfo", "Gives you some Information about the bot")
       .addField("~guildinfo", "Gives you some Information about the current Guild")
+      .addField("~shards", "Shows the amount of coins you have")
+      .addField("~xp", "Shows the amount of xp you have")
       .addField("~report [<user>] [<reason>]", "Reports a player")
       .addField("~kick [<user>] [<reason>]", "Kicks a player from the guild")
       .addField("~warn [<user>] [<reason>]", "Warns a specific player inside the guild")
       .addField("~ban [<user>] [<reason>]", "Bansa player from the guild")
       .addField("~purge [<integer]", "Purges a set amount of lines in the desired channel")
-      .addField("~say [<string>]", "Repeats what you said back to you");
+      .addField("~say [<string>]", "Repeats what you said back to you")
+      .setFooter("Version 1.0.5 BETA");
       
 
       return message.channel.send(botembed);
