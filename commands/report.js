@@ -12,7 +12,8 @@ module.exports.run = async (bot, message, args) => {
     .addField("Reported By", `${message.author}`)
     .addField("Channel", message.channel)
     .addField("TimeStamp", message.createdAt)
-    .addField("Reason", reason);
+    .addField("Reason", reason)
+    .setFooter("Version 1.0.5 BETA");
 
     let reportschannel = message.guild.channels.find(`name`, "reports");
     if(!reportschannel) return message.channel.send("Couldn't find appropriate reports channel!");
