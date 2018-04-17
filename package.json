@@ -1,13 +1,13 @@
 {
-  "name": "vilebot",
-  "version": "1.0.0",
-  "description": "The test bot for the Vile Discord server!",
+  "name": "Frost",
+  "version": "1.0.4",
+  "description": "A Moderation Bot with more features coming soon",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "FrostedWeFall",
+  "author": "FrostedWeFall#8609",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.3.2"

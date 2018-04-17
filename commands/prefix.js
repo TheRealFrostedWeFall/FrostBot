@@ -1,10 +1,10 @@
+
 const Discord = require("discord.js");
 const fs = require("fs");
-
 module.exports.run = async (bot, message, args) => {
 
-  if(!message.member.hasPermission("MANAGE_SERVER")) return message.reply("🤔 You do not have the required permissions to change the bot prefix on this server!");
-  if(!args[0] || args[0 == "help"]) return message.reply(`Usage: ${prefix}prefix [<new prefix>]`);
+  if(!message.member.hasPermission("MANAGE_SERVER")) return message.reply("Oi fuck off you cant do this m8");
+  if(!args[0] || args[0 == "help"]) return message.reply("Usage: ~prefix <desired prefix here>");
 
   let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
 
@@ -12,19 +12,18 @@ module.exports.run = async (bot, message, args) => {
     prefixes: args[0]
   };
 
-    fs.writeFile("./prefixes.json", JSON.stringify(prefixes), (err) => {
+  fs.writeFile("./prefixes.json", JSON.stringify(prefixes), (err) => {
     if (err) console.log(err)
   });
 
-  let PrefixEmbed = new Discord.RichEmbed()
-  .setColor("#42f4e5")
+  let sEmbed = new Discord.RichEmbed()
+  .setColor("#FF9900")
   .setTitle("Prefix Set!")
   .setDescription(`Set to ${args[0]}`);
 
-  message.channel.send(PrefixEmbed);
+  message.channel.send(sEmbed);
 
 }
 
 module.exports.help = {
   name: "prefix"
-}
