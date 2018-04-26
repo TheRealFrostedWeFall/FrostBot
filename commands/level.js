@@ -12,18 +12,17 @@ module.exports.run = async (bot, message, args) => {
 }
   let userxp = xp[message.author.id].xp;
   let userlvl = xp[message.author.id].level;
-  let nextLvlXp = userlvl * 300;
+  let nextLvlXp = userlvl * 1000;
   let difference = nextLvlXp - userxp;
 
   let lvlEmbed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
-  .setColor("#d604cf")
+  .setColor("#0263ff")
   .addField("Level", userlvl, true)
   .addField("XP", userxp, true)
-  .setFooter(`${difference} XP til level up`, message.author.displayAvatarURL);
+  .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
-  message.channel.send(lvlEmbed).then(msg => {msg.delete(5000)});
-
+  message.channel.send(lvlEmbed)
 }
 
 module.exports.help = {

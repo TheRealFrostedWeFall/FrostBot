@@ -6,12 +6,13 @@ module.exports.run = async (bot, message, args) => {
     .setTitle("FrostBot Information")
     .setDescription("Here is some information about me! ^-^")
     .setThumbnail(bicon)
-    .setColor("#42f4e5")
+    .setColor("#0263ff")
     .addField("Bot Name", bot.user.username)
     .addField("Bot Creator", "FrostedWeFall#8609")
     .addField("Bot Version", "V1.0.4")
     .addField("Discord.js Version", "^11.3.2")
-    .setFooter("Version 1.0.5 BETA");
+    .addField("Total Guilds", `${bot.guilds.size}`)
+    .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
    
 

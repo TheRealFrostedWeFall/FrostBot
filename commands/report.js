@@ -7,13 +7,13 @@ module.exports.run = async (bot, message, args) => {
     if(!reason) return message.channel.send("You must specify a reason to report this player")
     let reportembed = new Discord.RichEmbed()
     .setDescription("Report A User")
-    .setColor("#42f4e5")
+    .setColor("#0263ff")
     .addField("Reported User", `${rUser}`)
     .addField("Reported By", `${message.author}`)
     .addField("Channel", message.channel)
     .addField("TimeStamp", message.createdAt)
     .addField("Reason", reason)
-    .setFooter("Version 1.0.5 BETA");
+    .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarUR);
 
     let reportschannel = message.guild.channels.find(`name`, "reports");
     if(!reportschannel) return message.channel.send("Couldn't find appropriate reports channel!");
