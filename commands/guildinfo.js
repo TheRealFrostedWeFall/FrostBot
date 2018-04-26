@@ -6,12 +6,12 @@ module.exports.run = async (bot, message, args) => {
     .setTitle("Server Information")
     .setDescription("Some information about the current guild!")
     .setThumbnail(sicon)
-    .setColor("#42f4e5")    
+    .setColor("#0263ff")    
     .addField("Guild Name", message.guild.name)
     .addField("Guild Member Count", message.guild.memberCount)
     .addField("Guild Created On", message.guild.createdAt)
     .addField("You Joined this Guild at", message.member.joinedAt)
-    .setFooter("Version 1.0.5 BETA");
+    .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
     return message.channel.send(serverinfoembed);
 

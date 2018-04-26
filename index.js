@@ -6,6 +6,7 @@ bot.commands = new Discord.Collection();
 let shards = require("./shards.json");
 let xp = require("./xp.json");
 
+//(◕ ◡ ◕)
 
 fs.readdir("./commands/", (err, files) => {
 
@@ -26,18 +27,17 @@ fs.readdir("./commands/", (err, files) => {
 bot.on("ready", async () => {
 
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers and watching ${bot.users.size} users!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
-
+  bot.user.setActivity(`Currently in Maintenance | V1.0.6`, {type: "WATCHING"});
 });
 
 bot.on("guildCreate", guild => {
   console.log(`New guild joined: ${guild.name} | (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
+  bot.user.setActivity(`Currently in Maintenance | V1.0.6`, {type: "WATCHING"});
 });
 
 bot.on("guildDelete", guild => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
+  bot.user.setActivity(`Currently in Maintenance | V1.0.6`, {type: "WATCHING"});
 });
 
 
@@ -69,12 +69,21 @@ bot.on("message", async message => {
   fs.writeFile("./shards.json", JSON.stringify(shards), (err) => {
     if (err) console.log(err)
   });
+    
+  let userShards = shards[message.author.id].shards;
+
+  let shardicon = message.author.displayAvatarURL
   let shardEmbed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#0000FF")
-  .addField("💍", `${shardAmt} shards added!`);
+  .addField("Shards earnt by talking 💍", `${shardAmt} shards`, true)
+  .setThumbnail(shardicon)
+  .addField("Total amount of shards", userShards, true)
+  .addField("Gain more shards by talking in chat!", "Don't spam or you may be punished!", true)
+  .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+  
 
-  message.channel.send(shardEmbed).then(msg => {msg.delete(5000)});
+  message.channel.send(shardEmbed).then(msg => {msg.delete(10000)});
   }
 
   let xpAdd = Math.floor(Math.random() * 7) + 8;
@@ -89,7 +98,7 @@ bot.on("message", async message => {
 
   let userxp = xp[message.author.id].xp;
   let userlvl = xp[message.author.id].level;
-  let nextLvl = xp[message.author.id].level * 300;
+  let nextLvl = xp[message.author.id].level * 1000;
   xp[message.author.id].xp =  userxp + xpAdd;
   if(nextLvl <= xp[message.author.id].xp){
     xp[message.author.id].level = userlvl + 1;
@@ -97,9 +106,9 @@ bot.on("message", async message => {
     .setTitle("Level Up!")
     .setColor("#0000FF")
     .addField("New Level", userlvl + 1)
-    .setFooter("Version 1.0.5 BETA");
+    .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
-    message.channel.send(lvlup).then(msg => {msg.delete(8000)});
+    message.channel.send(lvlup)
   }
   fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
     if(err) console.log(err)
@@ -115,6 +124,11 @@ bot.on("message", async message => {
 
   let commandfile = bot.commands.get(cmd.slice(prefix.length));
   if(commandfile) commandfile.run(bot,message,args);
+  
+  if(!message.guild) {
+	return message.author.send("Hey, i dont work using DMs, please invite me to a Server! ✅ https://discordapp.com/oauth2/authorize?client_id=434159357434003456&permissions=10246&scope=bot")
+	console.log("INFO: Got DM'ed, Responded accordingly ✅")
+	}
 });
 
 bot.login(botconfig.token);

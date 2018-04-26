@@ -9,18 +9,18 @@ module.exports.run = async (bot, message, args) => {
     };
   }
 
-  let uShards = shards[message.author.id].shards;
+  let userShards = shards[message.author.id].shards;
 
-  let shardicon = bot.user.displayAvatarURL;
+  let shardicon = message.author.displayAvatarURL
   let shardEmbed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
-  .setColor("#00FF00")
+  .setColor("#0263ff")
   .setThumbnail(shardicon)
-  .addField(uShards, "Shards 💍")
-  .addField("Gain more shards by talking more in chat!")
-  .setFooter("Version 1.0.5 BETA");
+  .addField( "Shards 💍", userShards)
+  .addField("Gain more shards", "by talking more in chat!")
+  .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
-  message.channel.send(shardEmbed).then(msg => {msg.delete(8000)});
+  message.channel.send(shardEmbed)
 
 }
 
