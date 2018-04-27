@@ -27,24 +27,27 @@ fs.readdir("./commands/", (err, files) => {
 bot.on("ready", async () => {
 
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers and watching ${bot.users.size} users!`);
-  bot.user.setActivity(`Currently in Maintenance | V1.0.6`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
+  bot.user.setStatus('dnd')
 });
 
 bot.on("guildCreate", guild => {
   console.log(`New guild joined: ${guild.name} | (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  bot.user.setActivity(`Currently in Maintenance | V1.0.6`, {type: "WATCHING"});
-});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
+  bot.user.setStatus('idle')
+  });
 
 bot.on("guildDelete", guild => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-  bot.user.setActivity(`Currently in Maintenance | V1.0.6`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
+  bot.user.setStatus('dnd')
 });
-
 
 bot.on("message", async message => {
 
   if(message.author.bot) return;
-  if(message.channel.type === "dm") return;
+  if(message.channel.type === "dm") 
+    message.author.send("Hey, I dont work using DMs, please invite me to a Server! ✅ https://discordapp.com/oauth2/authorize?client_id=434159357434003456&permissions=10246&scope=bot")
 
   let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
   if(!prefixes[message.guild.id]){
@@ -53,6 +56,8 @@ bot.on("message", async message => {
     };
   }
 
+  
+  
   if(!shards[message.author.id]){
     shards[message.author.id] = {
       shards: 0
@@ -70,20 +75,20 @@ bot.on("message", async message => {
     if (err) console.log(err)
   });
     
-  let userShards = shards[message.author.id].shards;
+  //let userShards = shards[message.author.id].shards;
 
-  let shardicon = message.author.displayAvatarURL
-  let shardEmbed = new Discord.RichEmbed()
-  .setAuthor(message.author.username)
-  .setColor("#0000FF")
-  .addField("Shards earnt by talking 💍", `${shardAmt} shards`, true)
-  .setThumbnail(shardicon)
-  .addField("Total amount of shards", userShards, true)
-  .addField("Gain more shards by talking in chat!", "Don't spam or you may be punished!", true)
-  .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+  //let shardicon = message.author.displayAvatarURL
+ // let shardEmbed = new Discord.RichEmbed()
+ // .setAuthor(message.author.username)
+//  .setColor("#0000FF")
+//  .addField("Shards earnt by talking 💍", `${shardAmt} shards`, true)
+ // .setThumbnail(shardicon)
+ // .addField("Total amount of shards", userShards, true)
+ // .addField("Gain more shards by talking in chat!", "Don't spam or you may be punished!", true)
+ // .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
   
 
-  message.channel.send(shardEmbed).then(msg => {msg.delete(10000)});
+//  message.channel.send(shardEmbed).then(msg => {msg.delete(10000)});
   }
 
   let xpAdd = Math.floor(Math.random() * 7) + 8;
@@ -102,10 +107,12 @@ bot.on("message", async message => {
   xp[message.author.id].xp =  userxp + xpAdd;
   if(nextLvl <= xp[message.author.id].xp){
     xp[message.author.id].level = userlvl + 1;
+    message.author.displayAvatarURL
     let lvlup = new Discord.RichEmbed()
-    .setTitle("Level Up!")
+    .setTitle(`${message.author.username} Level Up!`)
     .setColor("#0000FF")
-    .addField("New Level", userlvl + 1)
+    .addField("Congratulations, you have Leveled up to Level ", userlvl + 1)
+    .addField("Keep on talking to earn more experience points", "Do not abuse this feature by spamming or you will be punished!")
     .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
     message.channel.send(lvlup)
@@ -125,10 +132,6 @@ bot.on("message", async message => {
   let commandfile = bot.commands.get(cmd.slice(prefix.length));
   if(commandfile) commandfile.run(bot,message,args);
   
-  if(!message.guild) {
-	return message.author.send("Hey, i dont work using DMs, please invite me to a Server! ✅ https://discordapp.com/oauth2/authorize?client_id=434159357434003456&permissions=10246&scope=bot")
-	console.log("INFO: Got DM'ed, Responded accordingly ✅")
-	}
 });
 
 bot.login(botconfig.token);
