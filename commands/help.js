@@ -18,7 +18,8 @@ module.exports.run = async (bot, message, args) => {
       .addField("~warn [<user>] [<reason>]", "Warns a specific player inside the guild")
       .addField("~ban [<user>] [<reason>]", "Bans a player from the guild")
       .addField("~purge [<integer>]", "Purges a set amount of lines in the desired channel")
-      .addField("~say [<string>]", "Repeats what you said back to you")
+      .addField("~say [<string>]", "Repeats what you said back to you [GUILD ADMINS ONLY]")
+      .addField("~support", "Need Support? Join my Support discord and Ill be happy to help you :>")
       .addField("~addrole [<user>] [<role parsed as string>]", "Adds a certain role to a player [ALPHA]")
       .addField("~removerole [<user>] [<role parsed as string>]", "Removes a certain role from a player [ALPHA]")
       .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
