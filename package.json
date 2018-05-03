@@ -1,7 +1,7 @@
 {
-  "name": "Frost",
+  "name": "FrostBotStaging",
   "version": "1.0.6",
-  "description": "A Moderation Bot with more features coming soon",
+  "description": "A Moderation Bot with more features coming soon [ STAGING VERSION ]",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

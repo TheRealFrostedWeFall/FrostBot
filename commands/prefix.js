@@ -20,7 +20,7 @@ module.exports.run = (bot, message, args) => {
   .setColor("#0263ff")
   .setTitle("Prefix Set!")
   .setDescription(`Set to ${args[0]}`)
-  .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+  .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
   message.channel.send(sEmbed);
 

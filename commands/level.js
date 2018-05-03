@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
   let userlvl = xp[message.author.id].level;
   let nextLvlXp = userlvl * 1000;
   let difference = nextLvlXp - userxp;
-
+  if (message.guild.id === "439643553648476160") return message.channel.send("I have been instructed not to send Level-Up messages in this discord!");
   let lvlEmbed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#0263ff")

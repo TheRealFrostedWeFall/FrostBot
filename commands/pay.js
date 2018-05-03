@@ -29,13 +29,14 @@ module.exports.run = async (bot, message, args) => {
   shards[pUser.id] = {
     shards: pShards + parseInt(args[1])
   };
+  if (!message.guild.id === "439643553648476160") return message.channel.send("❌ This command has been temporarily disabled for development reasons!");
   let pay = new Discord.RichEmbed()
     .setTitle("Shard Transactions")
     .setColor("#0263ff")
     .addField("Sender", message.author)
     .addField("Receiver", pUser)
     .addField("Shards Amount", `${args[1]}`)
-    .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+    .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
     message.channel.send(pay).then(msg => {msg.delete(25000)});
     console.log(`${message.author} has sent ${pUser} ${args[1]} shards. :ring:`);

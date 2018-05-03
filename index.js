@@ -6,7 +6,7 @@ bot.commands = new Discord.Collection();
 let shards = require("./shards.json");
 let xp = require("./xp.json");
 
-//(◕ ◡ ◕)
+
 
 fs.readdir("./commands/", (err, files) => {
 
@@ -27,20 +27,18 @@ fs.readdir("./commands/", (err, files) => {
 bot.on("ready", async () => {
 
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers and watching ${bot.users.size} users!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
-  bot.user.setStatus('dnd')
+
+  bot.user.setStatus('idle')
 });
 
 bot.on("guildCreate", guild => {
   console.log(`New guild joined: ${guild.name} | (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
   bot.user.setStatus('idle')
   });
 
 bot.on("guildDelete", guild => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~help  | Watching ${bot.users.size} players!`, {type: "WATCHING"});
-  bot.user.setStatus('dnd')
+  bot.user.setStatus('idle')
 });
 
 bot.on("message", async message => {
@@ -107,6 +105,7 @@ bot.on("message", async message => {
   xp[message.author.id].xp =  userxp + xpAdd;
   if(nextLvl <= xp[message.author.id].xp){
     xp[message.author.id].level = userlvl + 1;
+  if (message.guild.id === "439643553648476160") return
     message.author.displayAvatarURL
     let lvlup = new Discord.RichEmbed()
     .setTitle(`${message.author.username} Level Up!`)
