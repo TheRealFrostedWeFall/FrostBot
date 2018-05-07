@@ -14,13 +14,14 @@ module.exports.run = async (bot, message, args) => {
   let userlvl = xp[message.author.id].level;
   let nextLvlXp = userlvl * 1000;
   let difference = nextLvlXp - userxp;
-
+  if (message.guild.id === "439643553648476160") return message.channel.send("I have been instructed not to send Level-Up messages in this discord!");
+  if (message.guild.id === "421630709585805312") return message.channel.send("I have been instructed not to send Level-Up messages in this discord!");
   let lvlEmbed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#0263ff")
   .addField("Level", userlvl, true)
   .addField("XP", userxp, true)
-  .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+  .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
   message.channel.send(lvlEmbed)
 }

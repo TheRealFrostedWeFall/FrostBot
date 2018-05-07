@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Guild Member Count", message.guild.memberCount)
     .addField("Guild Created On", message.guild.createdAt)
     .addField("You Joined this Guild at", message.member.joinedAt)
-    .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+    .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
     return message.channel.send(serverinfoembed);
 

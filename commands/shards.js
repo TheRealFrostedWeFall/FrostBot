@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
   .setThumbnail(shardicon)
   .addField( "Shards 💍", userShards)
   .addField("Gain more shards", "by talking more in chat!")
-  .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+  .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
   message.channel.send(shardEmbed)
 

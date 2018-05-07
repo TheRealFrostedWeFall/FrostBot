@@ -35,7 +35,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Sender", message.author)
     .addField("Receiver", pUser)
     .addField("Shards Amount", `${args[1]}`)
-    .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+    .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
     message.channel.send(pay).then(msg => {msg.delete(25000)});
     console.log(`${message.author} has sent ${pUser} ${args[1]} shards. :ring:`);

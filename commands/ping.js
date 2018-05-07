@@ -4,9 +4,9 @@ module.exports.run = async (bot, message, args) => {
   let pingembed = new Discord.RichEmbed()
       .setDescription("🎉")
       .setColor("#0263ff")
-      .addField(`${Date.now() - (message.createdTimestamp)}ms`, "Roundtrip and Response ↪")
+      .addField(`${Date.now() - (message.createdTimestamp)}ms`, "Roundtrip and Response <a:customloading:439644282828226571>")
       .addField(`${Math.round(bot.ping)}ms`, "API ping 🏓")
-      .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+      .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
       
       return message.channel.send(pingembed);
         

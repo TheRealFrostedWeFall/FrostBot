@@ -22,7 +22,8 @@ module.exports.run = async (bot, message, args) => {
       .addField("~support", "Need Support? Join my Support discord and Ill be happy to help you :>")
       .addField("~addrole [<user>] [<role parsed as string>]", "Adds a certain role to a player [ALPHA]")
       .addField("~removerole [<user>] [<role parsed as string>]", "Removes a certain role from a player [ALPHA]")
-      .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+      .addField("~uptime","Shows you the current uptime for the bot!")
+      .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
       
       message.channel.send("Help has been sent to your Direct messages! (◕ ◡ ◕)")
       return message.author.send(botembed);
