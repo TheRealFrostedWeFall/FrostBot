@@ -5,7 +5,25 @@ const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 let shards = require("./shards.json");
 let xp = require("./xp.json");
+const DBL = require('dblapi.js');
+const dbl = new DBL(`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNDE1OTM1NzQzNDAwMzQ1NiIsImJvdCI6dHJ1ZSwiaWF0IjoxNTI0Njk4ODk1fQ.4eqW7ggLTVFdZiLCRHXrTaNB9nGdxKXKf6HBAonVfpI`, { webhookPort: 5000, webhookAuth: 'password' });
+dbl.webhook.on('ready', hook => {
+  console.log(`INFO: Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
+});
+dbl.webhook.on('vote', vote => {
+  console.log(`VOTE: User with ID ${vote.user} just voted!`);
+});
 
+const DiscordBoats = require("dboats-api");
+const boats = new DiscordBoats({token: "NRzVlTMdoCtmDIP069eze4FACjAcwA"}); // Every bot has a diffrent api key.
+ 
+// Getting your own bot.
+// Posting your bot's guild count.
+boats.postGuilds(`${bot.guilds.size}`).then(() => console.log("INFO: Sucessfully posted guild count to https://discordboats.club"));
+
+
+
+//(◕ ◡ ◕) 
 
 
 fs.readdir("./commands/", (err, files) => {
@@ -13,33 +31,37 @@ fs.readdir("./commands/", (err, files) => {
   if(err) console.log(err);
   let jsfile = files.filter(f => f.split(".").pop() === "js");
   if(jsfile.length <= 0){
-    console.log("Couldn't find commands.");
+    console.log("ERROR: Couldn't find commands.");
     return;
   }
 
   jsfile.forEach((f, i) =>{
     let props = require(`./commands/${f}`);
-    console.log(`${f} was loaded successfully!`);
+    console.log(`INFO: ${f} command file was loaded successfully!`);
     bot.commands.set(props.help.name, props);
   });
 });
 
 bot.on("ready", async () => {
 
-  console.log(`${bot.user.username} is online on ${bot.guilds.size} servers and watching ${bot.users.size} users!`);
-
-  bot.user.setStatus('idle')
+  console.log(`INFO: ${bot.user.username} is online on ${bot.guilds.size} servers and watching ${bot.users.size} users!`);
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~prefix`, {type: "WATCHING"});
+  bot.user.setStatus('dnd')
 });
 
 bot.on("guildCreate", guild => {
-  console.log(`New guild joined: ${guild.name} | (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+  console.log(`INFO: New guild joined: ${guild.name} | (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~prefix`, {type: "WATCHING"});
   bot.user.setStatus('idle')
   });
 
 bot.on("guildDelete", guild => {
-  console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-  bot.user.setStatus('idle')
+  console.log(`INFO: Frost has been removed from: ${guild.name} (id: ${guild.id})`);
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~prefix`, {type: "WATCHING"});
+  bot.user.setStatus('online')
 });
+
+
 
 bot.on("message", async message => {
 
@@ -105,14 +127,13 @@ bot.on("message", async message => {
   xp[message.author.id].xp =  userxp + xpAdd;
   if(nextLvl <= xp[message.author.id].xp){
     xp[message.author.id].level = userlvl + 1;
-  if (message.guild.id === "439643553648476160") return
     message.author.displayAvatarURL
     let lvlup = new Discord.RichEmbed()
     .setTitle(`${message.author.username} Level Up!`)
     .setColor("#0000FF")
     .addField("Congratulations, you have Leveled up to Level ", userlvl + 1)
     .addField("Keep on talking to earn more experience points", "Do not abuse this feature by spamming or you will be punished!")
-    .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+    .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
     message.channel.send(lvlup)
   }

@@ -29,7 +29,6 @@ module.exports.run = async (bot, message, args) => {
   shards[pUser.id] = {
     shards: pShards + parseInt(args[1])
   };
-  if (!message.guild.id === "439643553648476160") return message.channel.send("❌ This command has been temporarily disabled for development reasons!");
   let pay = new Discord.RichEmbed()
     .setTitle("Shard Transactions")
     .setColor("#0263ff")

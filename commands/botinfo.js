@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const botconfig = require("../package.json");
+const pack = require("../package.json");
 var upSecs = 0;
 var upMins = 0;
 var upHours = 0;
@@ -34,8 +34,9 @@ module.exports.run = async (bot, message, args) => {
     .setColor("#0263ff")
     .addField("Bot Name", bot.user.username)
     .addField("Bot Creator", "FrostedWeFall#8609")
-    .addField("Bot Version", "V1.0.4")
-    .addField("Discord.js Version", "^11.3.2")
+    .addField("Bot Version", `${pack.version}`)
+    .addField("Discord.js Version", `11.3.2 <:js:439652573910401024>`)
+    .addField("Discord Bots List API Version","2.0.1")
     .addField("Bot Uptime",`${upDays} Days | ${upHours} Hours | ${upMins} Minutes | ${upSecs} Seconds!`)
     .addField("Total Guilds", `${bot.guilds.size}`)
     .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);

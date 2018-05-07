@@ -30,10 +30,11 @@ var upDays = 0;
   module.exports.run = async (bot, message, args) => {
   let bicon = bot.user.displayAvatarURL;
     let uptimeembed = new Discord.RichEmbed()
-    .setTitle(`Requested By ${message.author.username}, message.author.displayAvatarURL`)
+    .setTitle(`FrostBot Uptime`)
+    .setDescription(`Requested By ${message.author.username}`)
     .setThumbnail(bicon)
     .setColor("#0263ff")
-    .addField("Current Uptime", `${upDays} Days | ${upHours} Hours | ${upMins} Minutes | ${upSecs} Seconds!`);   
+    .addField("Current Uptime", `${upDays} Days | ${upHours} Hours | ${upMins} Minutes | ${upSecs} Seconds! <a:partyblob:439667690550853632>`);   
 
     return message.channel.send(uptimeembed);
 

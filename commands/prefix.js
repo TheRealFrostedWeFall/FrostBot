@@ -3,7 +3,9 @@ const fs = require("fs");
 
 module.exports.run = (bot, message, args) => {
 
-  if(!message.member.hasPermission("MANAGE_SERVER")) return message.reply("You do not have the required permissions to change the prefix!");
+  if(!message.member.hasPermission("MANAGE_MESSAGES")){
+    return message.reply("You do not have the required permissions to change the prefix!");
+  }
   if(!args[0] || args[0 == "help"]) return message.reply(`Usage: ~prefix <desired prefix here>`);
   
   let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
@@ -19,10 +21,10 @@ module.exports.run = (bot, message, args) => {
   let sEmbed = new Discord.RichEmbed()
   .setColor("#0263ff")
   .setTitle("Prefix Set!")
-  .setDescription(`Set to ${args[0]}`)
+  .setDescription(`Set to ${args[0]} <a:partyblob:439667690550853632>`)
   .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
-  message.channel.send(sEmbed);
+  message.channel.send(`${message.author.username} Set my prefix to ${args[0]}`);
 
 }
 
