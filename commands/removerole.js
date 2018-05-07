@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
   let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
   if(!rMember) return message.reply("❌ The user you have specified can not be found, please try again later with a valid username!");
   let role = args.join(" ").slice(22);
-  if(!role) return message.reply("❌ Error: Please make sure you have specified a valid role!");
+  if(!role) return message.reply(`❌ Error: ${args[1]} Role Can not be found! Please make sure you have specified a valid role!`);
   let gRole = message.guild.roles.find(`name`, role);
   if(!gRole) return message.reply("❌ Error: Please make sure you have specified a valid role!");
 
