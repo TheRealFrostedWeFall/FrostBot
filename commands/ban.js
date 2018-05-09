@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, guild) => {
       message.delete().catch(O_o=>{});
       let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 
