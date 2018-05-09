@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 
-module.exports.run = (bot, message, args, prefix) => {
+module.exports.run = (bot, message, args) => {
 
   if(!message.member.hasPermission("MANAGE_MESSAGES")){
     return message.reply("You do not have the required permissions to change the prefix!");
   }
-  if(!args[0] || args[0 == "help"]) return message.reply(`Usage: ${prefix}prefix <desired prefix here>`);
+  if(!args[0] || args[0 == "help"]) return message.reply(`Usage: ~prefix <desired prefix here>`);
   
   let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
 

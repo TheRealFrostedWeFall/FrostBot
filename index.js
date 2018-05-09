@@ -19,7 +19,7 @@ const boats = new DiscordBoats({token: "NRzVlTMdoCtmDIP069eze4FACjAcwA"}); // Ev
  
 // Getting your own bot.
 // Posting your bot's guild count.
-boats.postGuilds(17).then(() => console.log("INFO: Sucessfully posted guild count to https://discordboats.club"));
+boats.postGuilds(`${bot.guilds.size}`).then(() => console.log("INFO: Sucessfully posted guild count to https://discordboats.club"));
 
 
 
@@ -34,7 +34,7 @@ fs.readdir("./commands/", (err, files) => {
     console.log("ERROR: Couldn't find commands.");
     return;
   }
-  
+
   jsfile.forEach((f, i) =>{
     let props = require(`./commands/${f}`);
     console.log(`INFO: ${f} command file was loaded successfully!`);
@@ -127,7 +127,6 @@ bot.on("message", async message => {
   xp[message.author.id].xp =  userxp + xpAdd;
   if(nextLvl <= xp[message.author.id].xp){
     xp[message.author.id].level = userlvl + 1;
-    if (message.guild.id === "421630709585805312") return;
     message.author.displayAvatarURL
     let lvlup = new Discord.RichEmbed()
     .setTitle(`${message.author.username} Level Up!`)

@@ -12,7 +12,6 @@
   "dependencies": {
     "discord.js": "^11.3.2",
     "dblapi.js": "^2.0.1",
-    "dboats-api": "^1.0.1",
-    "ms": "^2.1.1"
+    "dboats-api": "^1.0.1"
   }
 }

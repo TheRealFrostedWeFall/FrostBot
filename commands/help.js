@@ -17,7 +17,6 @@ module.exports.run = async (bot, message, args) => {
       .addField("~kick [<user>] [<reason>]", "Kicks a player from the guild")
       .addField("~warn [<user>] [<reason>]", "Warns a specific player inside the guild")
       .addField("~ban [<user>] [<reason>]", "Bans a player from the guild")
-      .addField("~mute [<user>] [<time ( eg 1h )>]", "Mutes a player in the guild")
       .addField("~purge [<integer>]", "Purges a set amount of lines in the desired channel")
       .addField("~say [<string>]", "Repeats what you said back to you [GUILD ADMINS ONLY]")
       .addField("~support", "Need Support? Join my Support discord and Ill be happy to help you :>")

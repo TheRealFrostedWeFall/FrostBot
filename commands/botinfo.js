@@ -41,9 +41,12 @@ module.exports.run = async (bot, message, args) => {
     .addField("Total Guilds", `${bot.guilds.size}`)
     .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
+   
+
+    return message.channel.send(infoembed);
+
+   }
   
-  message.channel.send(infoembed);
-}
   
   
   module.exports.help = {
