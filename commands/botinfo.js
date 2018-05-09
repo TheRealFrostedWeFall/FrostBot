@@ -40,24 +40,10 @@ module.exports.run = async (bot, message, args) => {
     .addField("Bot Uptime",`${upDays} Days | ${upHours} Hours | ${upMins} Minutes | ${upSecs} Seconds!`)
     .addField("Total Guilds", `${bot.guilds.size}`)
     .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
-    const info = [
-            '__About **King**__',
-            '',
-            'King is a multipurpose discord bot with exciting features!',
-            '',
-            `• is in **${client.guilds.size}** guilds.`,
-            `• is monitoring **${client.channels.size}** channels.`,
-            `• is playing with **${client.users.size}** other users.`,
-            `• is running Node.js version **${process.version}**.`,
-            `• is running Discord.js version **${require('discord.js').version}.**`,
-            `• is looking for new users! Use \`;help\` to find out how you can use Sky.`
-        ].join('\n');
-        message.channel.send(botinfo);
-   
 
-
-   }
   
+  message.channel.send(infoembed);
+}
   
   
   module.exports.help = {
