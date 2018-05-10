@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
   if(tomute.hasPermission("MANAGE_MESSAGES")){
     return message.reply("<:bloblol:430032405324234753> Sorrry I can not mute this user!");
   }
-  let muterole = message.guild.roles.find(`name`, "muted");
+  let muterole = message.guild.roles.find(`name`, "Muted");
   if(!muterole){
     try{
       muterole = await message.guild.createRole({

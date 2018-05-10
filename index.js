@@ -145,12 +145,14 @@ bot.on("message", async message => {
 
     message.channel.send(lvlup)
   }
+  
+
   fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
     if(err) console.log(err)
   });
   let prefix = prefixes[message.guild.id].prefixes;
   if(!message.content.startsWith(prefix)) return;
- 
+
 
 
   let messageArray = message.content.split(" ");
