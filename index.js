@@ -19,7 +19,7 @@ const boats = new DiscordBoats({token: "NRzVlTMdoCtmDIP069eze4FACjAcwA"}); // Ev
  
 // Getting your own bot.
 // Posting your bot's guild count.
-boats.postGuilds(17).then(() => console.log("INFO: Sucessfully posted guild count to https://discordboats.club"));
+boats.postGuilds(18).then(() => console.log("INFO: Sucessfully posted guild count to https://discordboats.club"));
 
 
 
@@ -34,6 +34,14 @@ fs.readdir("./commands/", (err, files) => {
     console.log("ERROR: Couldn't find commands.");
     return;
   }
+fs.readdir('./events', (err, files) => {
+    if (err) return console.error(err);
+    files.forEach(file => {
+        const eventFunction = require(`./events/${file}`);
+        const eventName = file.split('.')[0];
+        bot.on(eventName, (...args) => eventFunction.run(bot, ...args));
+    });
+});
   
   jsfile.forEach((f, i) =>{
     let props = require(`./commands/${f}`);
@@ -105,7 +113,6 @@ bot.on("message", async message => {
  // .setThumbnail(shardicon)
  // .addField("Total amount of shards", userShards, true)
  // .addField("Gain more shards by talking in chat!", "Don't spam or you may be punished!", true)
- // .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
   
 
 //  message.channel.send(shardEmbed).then(msg => {msg.delete(10000)});
@@ -155,4 +162,4 @@ bot.on("message", async message => {
   
 });
 
-bot.login(botconfig.token);
+bot.login(`${process.env.TOKEN}`);
