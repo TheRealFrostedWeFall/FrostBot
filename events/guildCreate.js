@@ -6,7 +6,7 @@ module.exports = {
             '➕ **__Joined guild!__**',
             `**__Name:__** ${guild.name} (${guild.id})`,
             `**__Owner:__** ${guild.owner.user.tag} (${guild.owner.user.id})`,
-            `**__Size:__** ${guild.memberCount}`
+            `**__Members:__** ${guild.memberCount}`
         ].join('\n');
         channel.send(log);
     }
