@@ -6,7 +6,7 @@ bot.commands = new Discord.Collection();
 let shards = require("./shards.json");
 let xp = require("./xp.json");
 const DBL = require('dblapi.js');
-const dbl = new DBL(`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNDE1OTM1NzQzNDAwMzQ1NiIsImJvdCI6dHJ1ZSwiaWF0IjoxNTI0Njk4ODk1fQ.4eqW7ggLTVFdZiLCRHXrTaNB9nGdxKXKf6HBAonVfpI`, { webhookPort: 5000, webhookAuth: 'password' });
+const dbl = new DBL(`${process.env.DBLKEY}`, { webhookPort: 5000, webhookAuth: 'password' });
 dbl.webhook.on('ready', hook => {
   console.log(`INFO: Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
 });
