@@ -35,7 +35,7 @@ module.exports.run = async (bot, message, args) => {
             `» I'm watching over **${bot.users.size}** other users.`,
             `» I'm running Node.js version **${process.version}**.`,
             `» I'm running Discord.js version **${require('discord.js').version}.**`,
-            `»  I'm using **${~~(process.memoryUsage().heapUsed / 1024 / 1024)}mb** of RAM`,
+            `» I'm using **${~~(process.memoryUsage().heapUsed / 1024 / 1024)}mb** of RAM`,
             `» I've been online for **${upDays}** Days **${upHours}** Hours **${upMins}** Minutes **${upSecs}** Seconds!`,
             `Be sure to invite Frost by typing **~invite**!`
         ].join('\n');
