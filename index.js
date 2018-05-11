@@ -71,7 +71,7 @@ bot.on("guildDelete", guild => {
 
 
 
-bot.on("message", async message => {
+bot.on("message", message => {
 
   if(message.author.bot) return;
   if(message.channel.type === "dm") 
@@ -165,3 +165,37 @@ bot.on("message", async message => {
 });
 
 bot.login(`${process.env.TOKEN}`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
