@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const pack = require("../package.json");
 var upSecs = 0;
 var upMins = 0;
 var upHours = 0;

@@ -47,19 +47,19 @@ fs.readdir('./events', (err, files) => {
 bot.on("ready", async () => {
 
   console.log(`INFO: ${bot.user.username} is online on ${bot.guilds.size} servers and watching ${bot.users.size} users!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | -prefix`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~prefix`, {type: "WATCHING"});
   bot.user.setStatus('dnd')
 });
 
 bot.on("guildCreate", guild => {
   console.log(`INFO: New guild joined: ${guild.name} | (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | -prefix`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~prefix`, {type: "WATCHING"});
   bot.user.setStatus('idle')
   });
 
 bot.on("guildDelete", guild => {
   console.log(`INFO: Frost has been removed from: ${guild.name} (id: ${guild.id})`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | -prefix`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~prefix`, {type: "WATCHING"});
   bot.user.setStatus('online')
 });
 

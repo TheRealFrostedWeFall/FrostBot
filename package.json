@@ -1,7 +1,7 @@
 {
-  "name": "FrostBotStaging",
-  "version": "1.0.6",
-  "description": "A Moderation Bot with more features coming soon [ STAGING VERSION ]",
+  "name": "FrostBot",
+  "version": "1.0.9",
+  "description": "A Moderation Bot with more features coming soon",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -12,6 +12,7 @@
   "dependencies": {
     "discord.js": "^11.3.2",
     "dblapi.js": "^2.0.1",
-    "dboats-api": "^1.0.0"
+    "dboats-api": "^1.0.0",
+    "ms": "^2.1.1"
   }
 }
