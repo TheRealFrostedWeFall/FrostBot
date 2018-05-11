@@ -1,6 +1,6 @@
 module.exports = {
     run: async (client, msg, args) => {
-        if(msg.author.id !== '315524485501550594') return msg.channel.send ("<:BlobBanned:439644067211771905> Feck off, Your abuse has been sent to FrostedWeFall#8609");
+        if(msg.author.id !== '315524485501550594') return msg.channel.send ("Feck off, Your abuse has been sent to FrostedWeFall#8609");
         function clean(text) {
             if (typeof(text) === 'string') {
               return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));

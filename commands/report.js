@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Reason", reason)
     .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarUR);
 
-    let reportschannel = message.guild.channels.find(`name`, "testing-1");
+    let reportschannel = message.guild.channels.find(`name`, "reports");
     if(!reportschannel) return message.channel.send("Couldn't find appropriate reports channel!");
 
     message.delete().catch(O_o=>{});

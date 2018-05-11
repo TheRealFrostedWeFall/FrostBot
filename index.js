@@ -6,7 +6,7 @@ bot.commands = new Discord.Collection();
 let shards = require("./shards.json");
 let xp = require("./xp.json");
 const DBL = require('dblapi.js');
-const dbl = new DBL(`${process.env.DBLKEY}`, { webhookPort: 5000, webhookAuth: 'password' });
+const dbl = new DBL(`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNDE1OTM1NzQzNDAwMzQ1NiIsImJvdCI6dHJ1ZSwiaWF0IjoxNTI0Njk4ODk1fQ.4eqW7ggLTVFdZiLCRHXrTaNB9nGdxKXKf6HBAonVfpI`, { webhookPort: 5000, webhookAuth: 'password' });
 dbl.webhook.on('ready', hook => {
   console.log(`INFO: Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
 });
@@ -14,12 +14,6 @@ dbl.webhook.on('vote', vote => {
   console.log(`VOTE: User with ID ${vote.user} just voted!`);
 });
 
-const DiscordBoats = require("dboats-api");
-const boats = new DiscordBoats({token: "${process.env.BOATAPI}"}); // Every bot has a diffrent api key.
- 
-// Getting your own bot.
-// Posting your bot's guild count.
-boats.postGuilds(19).then(() => console.log("INFO: Sucessfully posted guild count to https://discordboats.club"));
 
 
 
@@ -53,25 +47,25 @@ fs.readdir('./events', (err, files) => {
 bot.on("ready", async () => {
 
   console.log(`INFO: ${bot.user.username} is online on ${bot.guilds.size} servers and watching ${bot.users.size} users!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~prefix`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | -prefix`, {type: "WATCHING"});
   bot.user.setStatus('dnd')
 });
 
 bot.on("guildCreate", guild => {
   console.log(`INFO: New guild joined: ${guild.name} | (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~prefix`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | -prefix`, {type: "WATCHING"});
   bot.user.setStatus('idle')
   });
 
 bot.on("guildDelete", guild => {
   console.log(`INFO: Frost has been removed from: ${guild.name} (id: ${guild.id})`);
-  bot.user.setActivity(`over ${bot.guilds.size} guilds! | ~prefix`, {type: "WATCHING"});
+  bot.user.setActivity(`over ${bot.guilds.size} guilds! | -prefix`, {type: "WATCHING"});
   bot.user.setStatus('online')
 });
 
 
 
-bot.on("message", message => {
+bot.on("message", async message => {
 
   if(message.author.bot) return;
   if(message.channel.type === "dm") 
@@ -152,8 +146,7 @@ bot.on("message", message => {
   });
   let prefix = prefixes[message.guild.id].prefixes;
   if(!message.content.startsWith(prefix)) return;
-
-
+ 
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
@@ -165,37 +158,3 @@ bot.on("message", message => {
 });
 
 bot.login(`${process.env.TOKEN}`);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

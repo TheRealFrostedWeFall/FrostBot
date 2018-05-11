@@ -34,7 +34,7 @@ var upDays = 0;
     .setDescription(`Requested By ${message.author.username}`)
     .setThumbnail(bicon)
     .setColor("#0263ff")
-    .addField("Current Uptime", `${upDays} Days | ${upHours} Hours | ${upMins} Minutes | ${upSecs} Seconds! <a:partyblob:439667690550853632>`);   
+    .addField("Current Uptime", `${upDays} Days | ${upHours} Hours | ${upMins} Minutes | ${upSecs} Seconds!`);   
 
     return message.channel.send(uptimeembed);
 
