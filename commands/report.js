@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
     .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL, true);
 
     let reportschannel = message.guild.channels.find(`name`, "ultimate-testing-1");
-    if(!reportschannel) return message.channel.send(`Couldn't find appropriate reports channel! Please make a channel called __**${reportschannel}**__`);
+    if(!reportschannel) return message.channel.send(`Couldn't find appropriate reports channel! Please make a channel called __**reports**__`);
 
     message.delete().catch(O_o=>{});
     reportschannel.send(reportembed);
