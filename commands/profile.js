@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const botconfig = require("../botconfig");
 let xp = require("../xp.json");
 let coins = require("../coins.json");
+const fs = require("fs");
 module.exports.run = async (bot, message, args, userCoins, coins) => {
 
   if(!xp[message.author.id]){
