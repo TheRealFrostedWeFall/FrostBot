@@ -17,11 +17,12 @@ module.exports.run = async (bot, message, args) => {
   let difference = nextLvlXp - userxp;
   if (message.guild.id === "439643553648476160") return message.channel.send("I have been instructed not to send Level-Up messages in this discord!");
   let lvlEmbed = new Discord.RichEmbed()
-  .setAuthor(message.author.username)
+  .setAuthor(`${message.author.username}'s Level`)
+  .setDescription(`${message.author.username}'s current global experience level!`)
   .setColor("#0263ff")
   .setThumbnail(uicon)
-  .addField("Level", userlvl, true)
-  .addField("XP", userxp, true)
+  .addField("Current Level 🌐", userlvl, true)
+  .addField("Total Experience <:blep:443957351490256896>", `${userxp} XP`, true)
   .setFooter(`${difference} XP til level up`, message.author.displayAvatarURL);
 
   message.channel.send(lvlEmbed)
