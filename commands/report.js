@@ -19,6 +19,7 @@ module.exports.run = async (bot, message, args) => {
     if(!reportschannel) return message.channel.send(`Couldn't find appropriate reports channel! Please make a channel called __**reports**__`);
 
     message.delete().catch(O_o=>{});
+    message.channel.send("\\✅ Player has successfully been reported and sent to #reports!")
     reportschannel.send(reportembed);
   }
   
