@@ -1,6 +1,6 @@
 {
   "name": "frost",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A Moderation Bot with more features coming soon",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "dependencies": {
     "discord.js": "^11.3.2",
     "dblapi.js": "^2.0.1",
-    "dboats-api": "^1.0.1",
+    "dboats-api": "^1.0.0",
     "ms": "^2.1.1"
   }
 }

@@ -7,5 +7,5 @@ app.get("/", (request, response) => {
 });
 app.listen(process.env.PORT);
 setInterval(() => {
- http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+ http.get(`http://frostbot.glitch.me/`);
 }, 280000);

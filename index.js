@@ -3,10 +3,10 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
-let shards = require("./shards.json");
+let coins = require("./coins.json");
 let xp = require("./xp.json");
 const DBL = require('dblapi.js');
-const dbl = new DBL(`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNDE1OTM1NzQzNDAwMzQ1NiIsImJvdCI6dHJ1ZSwiaWF0IjoxNTI0Njk4ODk1fQ.4eqW7ggLTVFdZiLCRHXrTaNB9nGdxKXKf6HBAonVfpI`, { webhookPort: 5000, webhookAuth: 'password' });
+const dbl = new DBL(`${process.env.DBLKEY}`, { webhookPort: 5000, webhookAuth: 'password' });
 dbl.webhook.on('ready', hook => {
   console.log(`INFO: Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
 });
@@ -80,20 +80,20 @@ bot.on("message", async message => {
 
   
   
-  if(!shards[message.author.id]){
-    shards[message.author.id] = {
-      shards: 0
+  if(!coins[message.author.id]){
+    coins[message.author.id] = {
+      coins: 0
     };
   }
 
-  let shardAmt = Math.floor(Math.random() * 5) + 1;
+  let coinAmt = Math.floor(Math.random() * 5) + 1;
   let baseAmt = Math.floor(Math.random() * 5) + 1;
 
-  if(shardAmt === baseAmt){
-    shards[message.author.id] = {
-      shards: shards[message.author.id].shards + shardAmt
+  if(coinAmt === baseAmt){
+    coins[message.author.id] = {
+      coins: coins[message.author.id].coins + coinAmt
     };
-  fs.writeFile("./shards.json", JSON.stringify(shards), (err) => {
+  fs.writeFile("./coins.json", JSON.stringify(coins), (err) => {
     if (err) console.log(err)
   });
     
@@ -133,8 +133,8 @@ bot.on("message", async message => {
     let lvlup = new Discord.RichEmbed()
     .setTitle(`${message.author.username} Level Up!`)
     .setColor("#0000FF")
-    .addField("Congratulations, you have Leveled up to Level ", userlvl + 1)
-    .addField("Keep on talking to earn more experience points", "Do not abuse this feature by spamming or you will be punished!")
+    .addField("Congratulations, you have Leveled up to Level ", userlvl + 1, true)
+    .addField("Keep on talking to earn more experience points", "Do not abuse this feature by spamming or you will be punished!", true)
     .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
 
     message.channel.send(lvlup)

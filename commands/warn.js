@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args, guild) => {
+module.exports.run = async (bot, message, args) => {
   message.delete().catch(O_o=>{});
       let wUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 
@@ -15,7 +15,6 @@ module.exports.run = async (bot, message, args, guild) => {
 
       message.channel.send(`✅ ${wUser} has been warned for ${warnreason}`);
       message.guild.member(wUser).warn(warnreason);
-
 
 
 }
