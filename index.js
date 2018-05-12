@@ -14,12 +14,6 @@ dbl.webhook.on('vote', vote => {
   console.log(`VOTE: User with ID ${vote.user} just voted!`);
 });
 
-const DiscordBoats = require("dboats-api");
-const boats = new DiscordBoats({token: "NRzVlTMdoCtmDIP069eze4FACjAcwA"}); // Every bot has a diffrent api key.
- 
-// Getting your own bot.
-// Posting your bot's guild count.
-boats.postGuilds(18).then(() => console.log("INFO: Sucessfully posted guild count to https://discordboats.club"));
 
 
 
@@ -152,8 +146,7 @@ bot.on("message", async message => {
   });
   let prefix = prefixes[message.guild.id].prefixes;
   if(!message.content.startsWith(prefix)) return;
-
-
+ 
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
