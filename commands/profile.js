@@ -47,8 +47,9 @@ module.exports.run = async (bot, message, args) => {
   .setColor("#0263ff")
   .setThumbnail(uicon)
   .addField("Global Level <:toohappy:443957306263076866>", userlvl, true)
-  .addField("Total Experience <:blep:443957351490256896>", userxp, true)
+  .addField("Total Experience <:blep:443957351490256896>", `${userxp} XP`, true)
   .addField("Total Coins 📀", `${userCoins} \\📀`, true)
+  .addField("ID <a:coolpartyblob:439667713506279425>", `${message.author.id}`, true)
   .setFooter(`${difference}XP Till you level up to Level ${userlvl + 1}`, message.author.displayAvatarURL);
   const mess = await message.channel.send(`<a:customloading:439644282828226571> Loading Profile of user ${message.author.id}`);
   mess.edit(profileEmbed);                    
