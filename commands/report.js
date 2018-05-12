@@ -8,15 +8,15 @@ module.exports.run = async (bot, message, args) => {
     let reportembed = new Discord.RichEmbed()
     .setDescription("Report A User")
     .setColor("#0263ff")
-    .addField("Reported User", `${rUser}`)
-    .addField("Reported By", `${message.author}`)
-    .addField("Channel", message.channel)
-    .addField("TimeStamp", message.createdAt)
-    .addField("Reason", reason)
-    .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarUR);
+    .addField("Reported User", `${rUser}`, true)
+    .addField("Reported By", `${message.author}`, true)
+    .addField("Channel", message.channel, true)
+    .addField("TimeStamp", message.createdAt, true)
+    .addField("Reason", reason, true)
+    .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL, true);
 
-    let reportschannel = message.guild.channels.find(`name`, "reports");
-    if(!reportschannel) return message.channel.send("Couldn't find appropriate reports channel!");
+    let reportschannel = message.guild.channels.find(`name`, "ultimate-testing-1");
+    if(!reportschannel) return message.channel.send(`Couldn't find appropriate reports channel! Please make a channel called **__${reportschannel}**__`);
 
     message.delete().catch(O_o=>{});
     reportschannel.send(reportembed);

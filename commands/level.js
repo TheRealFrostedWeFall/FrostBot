@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
   .setThumbnail(uicon)
   .addField("Current Level 🌐", userlvl, true)
   .addField("Total Experience <:blep:443957351490256896>", `${userxp} XP`, true)
-  .setFooter(`${difference}XP Till you level up to Level ${userlvl + 1}`, message.author.displayAvatarURL);
+  .setFooter(`${difference} XP Till you level up to Level ${userlvl + 1}`, message.author.displayAvatarURL);
   const mess = await message.channel.send(`<a:customloading:439644282828226571> Loading Experience Data of user ${message.author.id}`);
   mess.edit(lvlEmbed)
 }
