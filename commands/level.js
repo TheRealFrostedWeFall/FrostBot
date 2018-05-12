@@ -10,6 +10,7 @@ module.exports.run = async (bot, message, args) => {
      level: 1
   };
 }
+  let uicon = message.author.displayAvatarURL;
   let userxp = xp[message.author.id].xp;
   let userlvl = xp[message.author.id].level;
   let nextLvlXp = userlvl * 1000;
@@ -18,9 +19,10 @@ module.exports.run = async (bot, message, args) => {
   let lvlEmbed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#0263ff")
+  .setThumbnail(uicon)
   .addField("Level", userlvl, true)
   .addField("XP", userxp, true)
-  .setFooter(`Version 1.0.5 BETA | Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
+  .setFooter(`${difference} XP til level up`, message.author.displayAvatarURL);
 
   message.channel.send(lvlEmbed)
 }

@@ -1,5 +1,5 @@
 module.exports = {
-    run: async (client, msg, args) => {
+    run: async (bot, msg, args) => {
         if (!args[0]) msg.channel.send('\\❌ Please provide a command name to reload.');
         if(msg.author.id !== '315524485501550594') msg.channel.send ("<:Themadman:433793751756963854> You may not execute this command, It is limited to Developers only!");
         delete require.cache[require.resolve(`./${args[0]}.js`)];
