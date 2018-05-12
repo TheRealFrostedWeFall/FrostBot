@@ -3,7 +3,7 @@ const botconfig = require("../botconfig");
 let xp = require("../xp.json");
 let coins = require("../coins.json");
 const fs = require("fs");
-module.exports.run = async (bot, message, args, userCoins, coins) => {
+module.exports.run = async (bot, message, args) => {
 
   if(!xp[message.author.id]){
    message.channel.send(`<a:customloading:439644282828226571> Created New profile for user ${message.author.id}. Please retype ~profile`);    
@@ -22,8 +22,7 @@ module.exports.run = async (bot, message, args, userCoins, coins) => {
 
   // Coins Function but not function //
 
-  if(!coins[message.author.id]){
-    message.channel.send(`<a:customloading:439644282828226571> Created New profile for user ${message.author.id}. Please retype ~profile`);    
+  if(!coins[message.author.id]){  
     coins[message.author.id] = {
       coins: 0
     };
@@ -40,6 +39,7 @@ module.exports.run = async (bot, message, args, userCoins, coins) => {
     if (err) console.log(err)
   });
   }
+  let userCoins = coins[message.author.id].coins;
   if(message.author.id !== '315524485501550594') return message.channel.send ("<:toohappy:443956536486789131> As this command is still in development, It is limited to FrostedWeFall#8609 Only");
   let profileEmbed = new Discord.RichEmbed()
   .setAuthor(`${message.author.username}'s Profile`)
@@ -48,7 +48,7 @@ module.exports.run = async (bot, message, args, userCoins, coins) => {
   .setThumbnail(uicon)
   .addField("Global Level <:toohappy:443957306263076866>", userlvl, true)
   .addField("Total Experience <:blep:443957351490256896>", userxp, true)
-  .addField("Total Coins 📀", userCoins, true)
+  .addField("Total Coins 📀", `${userCoins} \\📀`, true)
   .setFooter(`${difference}XP Till you level up to Level ${userlvl + 1}`, message.author.displayAvatarURL);
   const mess = await message.channel.send(`<a:customloading:439644282828226571> Loading Profile of user ${message.author.id}`);
   mess.edit(profileEmbed);                    
