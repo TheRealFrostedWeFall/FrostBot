@@ -21,8 +21,24 @@ module.exports.run = async (bot, message, args, userCoins, coins) => {
 
   // Coins Function but not function //
 
-  
+  if(!coins[message.author.id]){
+    message.channel.send(`<a:customloading:439644282828226571> Created New profile for user ${message.author.id}. Please retype ~profile`);    
+    coins[message.author.id] = {
+      coins: 0
+    };
+  }
 
+  let coinAmt = Math.floor(Math.random() * 5) + 1;
+  let baseAmt = Math.floor(Math.random() * 5) + 1;
+
+  if(coinAmt === baseAmt){
+    coins[message.author.id] = {
+      coins: coins[message.author.id].coins + coinAmt
+    };
+  fs.writeFile("./coins.json", JSON.stringify(coins), (err) => {
+    if (err) console.log(err)
+  });
+  }
   if(message.author.id !== '315524485501550594') return message.channel.send ("<:toohappy:443956536486789131> As this command is still in development, It is limited to FrostedWeFall#8609 Only");
   let profileEmbed = new Discord.RichEmbed()
   .setAuthor(`${message.author.username}'s Profile`)
