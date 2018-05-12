@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
   .setColor("#0263ff")
   .setThumbnail(coinicon)
   .addField("Coins 📀", `${userCoins} \\📀`, true)
-  .addField( "Bank 🏦", "Coming Soon \\🏦", true)
+  .addField( "Bank 🏦", "Soon \\🏦", true)
   .addField("Gain more coins", "by talking in chat!", true)
   .addField("Send coins to people", "~pay <user> <amount>", true)
   .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);

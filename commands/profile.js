@@ -11,12 +11,18 @@ module.exports.run = async (bot, message, args, userCoins, coins) => {
      level: 1
   };
 }
-  
+  // Levels Function but not function // 
   let uicon = message.author.displayAvatarURL;
   let userxp = xp[message.author.id].xp;
   let userlvl = xp[message.author.id].level;
   let nextLvlXp = userlvl * 1000;
   let difference = nextLvlXp - userxp;
+
+
+  // Coins Function but not function //
+
+  
+
   if(message.author.id !== '315524485501550594') return message.channel.send ("<:toohappy:443956536486789131> As this command is still in development, It is limited to FrostedWeFall#8609 Only");
   let profileEmbed = new Discord.RichEmbed()
   .setAuthor(`${message.author.username}'s Profile`)
