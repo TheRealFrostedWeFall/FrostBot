@@ -37,9 +37,10 @@ module.exports.run = async (bot, message, args) => {
     .addField("Receiver", pUser)
     .addField("Coin Amount", `${args[1]}`)
     .setFooter(`Requested By ${message.author.username} ID: ${message.author.id}`, message.author.displayAvatarURL);
-
-    message.channel.send(pay).then(msg => {msg.delete(25000)});
-    console.log(`${message.author} has sent ${pUser} ${args[1]} Coins. :ring:`);
+    
+  message.channel.send("<:toohappy:443956536486789131> This command is currently under development and therefore has been limited to Developers only!")
+    //message.channel.send(pay).then(msg => {msg.delete(25000)});
+    //console.log(`${message.author} has sent ${pUser} ${args[1]} Coins. :ring:`);
 
   fs.writeFile("./coins.json", JSON.stringify(Coins), (err) => {
     if(err) console.log(err)

@@ -40,7 +40,7 @@ module.exports.run = async (bot, message, args) => {
   });
   }
   let userCoins = coins[message.author.id].coins;
-  if(message.author.id !== '315524485501550594') return message.channel.send ("<:toohappy:443956536486789131> As this command is still in development, It is limited to FrostedWeFall#8609 Only");
+ // if(message.author.id !== '315524485501550594') return message.channel.send ("<:toohappy:443956536486789131> As this command is still in development, It is limited to FrostedWeFall#8609 Only");
   let profileEmbed = new Discord.RichEmbed()
   .setAuthor(`${message.author.username}'s Profile`)
   .setDescription(`${message.author.username} has not yet set a bio <:rejected:436824567898570763>`)
