@@ -7,5 +7,5 @@ app.get("/", (request, response) => {
 });
 app.listen(process.env.PORT);
 setInterval(() => {
- http.get(`http://frostbot.glitch.me/`);
+ http.get(`https://frostdiscord.herokuapp.com/`);
 }, 280000);

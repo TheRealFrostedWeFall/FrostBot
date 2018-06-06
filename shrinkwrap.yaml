@@ -2,6 +2,8 @@ dependencies:
   dblapi.js: 2.0.1
   dboats-api: 1.0.1
   discord.js: 11.3.2
+  enmap: 2.6.1
+  ms: 2.1.1
 packages:
   /async-limiter/1.0.0:
     dev: false
@@ -39,10 +41,34 @@ packages:
       uws: ^9.14.0
     resolution:
       integrity: sha512-Abw9CTMX3Jb47IeRffqx2VNSnXl/OsTdQzhvbw/JnqCyqc2imAocc7pX2HoRmgKd8CgSqsjBFBneusz/E16e6A==
+  /dot-prop/4.2.0:
+    dependencies:
+      is-obj: 1.0.1
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-tUMXrxlExSW6U2EXiiKGSBVdYgtV8qlHL+C10TsW4PURY/ic+eaysnSkwB4kA/mBlCyy/IKDJ+Lc3wbWeaXtuQ==
+  /enmap/2.6.1:
+    dependencies:
+      dot-prop: 4.2.0
+    dev: false
+    resolution:
+      integrity: sha512-Z2YrbwP3Bsb/Dk2gARRjTcZXGY13HstgY5c+ewg/nYdI79c5mOV5I3h/AfVcDR0wMnvjcEvoq2JIk9PxYLUhkA==
+  /is-obj/1.0.1:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-PkcprB9f3gJc19g6iW2rn09n2w8=
   /long/4.0.0:
     dev: false
     resolution:
       integrity: sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
+  /ms/2.1.1:
+    dev: false
+    resolution:
+      integrity: sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
   /prism-media/0.0.2:
     dev: false
     resolution:
@@ -67,9 +93,11 @@ packages:
     resolution:
       integrity: sha512-ZGh/8kF9rrRNffkLFV4AzhvooEclrOH0xaugmqGsIfFgOE/pIz4fMc4Ef+5HSQqTEug2S9JZIWDR47duDSLfaA==
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 5
+shrinkwrapMinorVersion: 7
 shrinkwrapVersion: 3
 specifiers:
   dblapi.js: ^2.0.1
   dboats-api: ^1.0.0
   discord.js: ^11.3.2
+  enmap: ^2.6.1
+  ms: ^2.1.1
